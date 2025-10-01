@@ -6,6 +6,8 @@ require('dotenv').config(); // To use environment variables from .env file
 
 // Import routes
 const authRoutes = require('./routes/auth');
+const surveyRoutes = require('./routes/surveys'); // <-- ADD THIS LINE
+const responseRoutes = require('./routes/responses'); // <-- ADD THIS LINE
 
 // Initialize the Express app
 const app = express();
@@ -25,6 +27,9 @@ mongoose.connect(process.env.MONGO_URI)
 // --- API Routes ---
 // This tells the app to use the auth routes for any request starting with /api/auth
 app.use('/api/auth', authRoutes);
+app.use('/api/surveys', surveyRoutes); // <-- ADD THIS LINE
+app.use('/api/responses', responseRoutes); // <-- ADD THIS LINE
+
 
 // A simple test route to make sure the server is running
 app.get('/', (req, res) => {
@@ -35,3 +40,4 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
